@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pandas Lab Assignment - Questions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .code-block {
+            background-color: #1f2937; /* Gray-900 */
+            color: #d1d5db; /* Gray-300 */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            position: relative;
+        }
+        .expected-output {
+            background-color: #f3f4f6; /* Gray-100 */
+            color: #374151; /* Gray-700 */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #4ade80; /* Green-400 */
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        h2 {
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+        h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: #4b5563;
+            color: #e5e7eb;
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .copy-btn:hover {
+            background-color: #6b7280;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-5xl">
+        <header class="bg-white shadow-md rounded-lg p-6 mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">Pandas Lab Assignment: Data Manipulation and Analysis</h1>
+            <p class="mt-2 text-gray-600"><strong>Objective:</strong> To solve a series of problems using the pandas library, testing your ability to manipulate, aggregate, and analyze data.</p>
+
+        </header>
+
+        <main class="bg-white shadow-md rounded-lg p-6">
+            <h2 class="text-2xl font-semibold mb-4">Part 1: General Pandas Problems</h2>
+
+            <!-- Question 1 -->
+            <div class="mb-12">
+                <h3 class="text-xl font-semibold">Question 1: Time Series Resampling</h3>
+                <p class="mb-4">Given the time-series DataFrame `ts_df`, resample the data to find the mean of the 'Value' column for each 3-hour interval.</p>
+                <div class="code-block">
+                    <button class="copy-btn">Copy</button>
+<code class="language-python">
+import pandas as pd
+import numpy as np
+
+# Data Setup
+data = {
+    'DateTime': pd.to_datetime([
+        '2025-08-15 00:00:00', '2025-08-15 01:00:00', '2025-08-15 02:30:00',
+        '2025-08-15 03:30:00', '2025-08-15 04:00:00', '2025-08-15 07:00:00'
+    ]),
+    'Value': [10, 12, 8, 15, 18, 20]
+}
+ts_df = pd.DataFrame(data)
+
+# Your code here:
+</code>
+                </div>
+                <h4 class="font-semibold mt-4 mb-2">Expected Output:</h4>
+                <div class="expected-output">DateTime
+2025-08-15 00:00:00    10.0
+2025-08-15 03:00:00    16.5
+2025-08-15 06:00:00    20.0
+Name: Value, dtype: float64</div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="mb-12">
+                <h3 class="text-xl font-semibold">Question 2: Using `pipe()` for Chainable Operations</h3>
+                <p class="mb-4">Create two functions: `add_revenue_col(df)` and `apply_discount(df, discount=0.10)`. Then, use `df.pipe()` to apply them sequentially to `pipe_df`.</p>
+                <div class="code-block">
+                    <button class="copy-btn">Copy</button>
+<code class="language-python">
+# Data Setup
+data = {'Price': [100, 150, 200], 'Quantity': [5, 10, 4]}
+pipe_df = pd.DataFrame(data)
+
+# Your function definitions here:
+
+
+# Your code here using .pipe():
+</code>
+                </div>
+                <h4 class="font-semibold mt-4 mb-2">Expected Output:</h4>
+                <div class="expected-output">   Price  Quantity  Revenue
+0   90.0         5      500
+1  135.0        10     1500
+2  180.0         4      800</div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="mb-12">
+                <h3 class="text-xl font-semibold">Question 3: Group-wise Percentage with `transform()`</h3>
+                <p class="mb-4">In `transform_df`, create a new column `'Pct_of_Category_Value'` that contains the percentage of each 'Value' relative to the sum of values within its own 'Category'.</p>
+                <div class="code-block">
+                    <button class="copy-btn">Copy</button>
+<code class="language-python">
+# Data Setup
+data = {'Category': ['A', 'A', 'B', 'B'], 'Value': [10, 30, 20, 80]}
+transform_df = pd.DataFrame(data)
+
+# Your code here:
+</code>
+                </div>
+                <h4 class="font-semibold mt-4 mb-2">Expected Output:</h4>
+                <div class="expected-output">  Category  Value  Pct_of_Category_Value
+0        A     10                   0.25
+1        A     30                   0.75
+2        B     20                   0.20
+3        B     80                   0.80</div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="mb-12">
+                <h3 class="text-xl font-semibold">Question 4: Creating a MultiIndex</h3>
+                <p class="mb-4">Convert `multi_df` to use a `MultiIndex` composed of the 'Year' and 'Quarter' columns.</p>
+                <div class="code-block">
+                    <button class="copy-btn">Copy</button>
+<code class="language-python">
+# Data Setup
+data = {
+    'Year': [2024, 2024, 2025, 2025],
+    'Quarter': ['Q1', 'Q2', 'Q1', 'Q2'],
+    'Sales': [1000, 1200, 1100, 1300]
+}
+multi_df = pd.DataFrame(data)
+
+# Your code here:
+</code>
+                </div>
+                <h4 class="font-semibold mt-4 mb-2">Expected Output:</h4>
+                <div class="expected-output">             Sales
+Year Quarter       
+2024 Q1       1000
+     Q2       1200
+2025 Q1       1100
+     Q2       1300</div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="mb-12">
+                <h3 class="text-xl font-semibold">Question 5: `agg()` vs. `transform()`</h3>
+                <p class="mb-4">a) Create `avg_value_df` showing the single average 'Value' for each 'Group'.<br>b) Add a `'Group_Avg_Value'` column to `agg_trans_df` showing the group average for each row.</p>
+                <div class="code-block">
+                    <button class="copy-btn">Copy</button>
+<code class="language-python">
+# Data Setup
+data = {'Group': ['X', 'X', 'Y', 'Y'], 'Value': [15, 25, 30, 40]}
+agg_trans_df = pd.DataFrame(data)
+
+# a) Your code for the aggregated DataFrame:
+
+
+# b) Your code to add the transformed column:
+
+
+print("--- Aggregated DataFrame (a) ---")
+# print(avg_value_df)
+print("\n--- Original DataFrame with Transformed Column (b) ---")
+# print(agg_trans_df)
+</code>
+                </div>
+                 <h4 class="font-semibold mt-4 mb-2">Expected Output:</h4>
+                <div class="expected-output">--- Aggregated DataFrame (a) ---
+       Value
+Group       
+X       20.0
+Y       35.0
+
+--- Original DataFrame with Transformed Column (b) ---
+  Group  Value  Group_Avg_Value
+0     X     15             20.0
+1     X     25             20.0
+2     Y     30             35.0
+3     Y     40             35.0</div>
+            </div>
+
+            <hr class="my-12 border-t-2">
+
+            <h2 class="text-2xl font-semibold mb-4">Part 2: Dataset-Based Problems</h2>
+            <p class="mb-4">Use the DataFrame `sales_df` created by the setup cell below for all questions in this part.</p>
+            <div class="code-block">
+                <button class="copy-btn">Copy</button>
+<code class="language-python">
+# --- DATASET SETUP ---
+# Execute this cell to create the DataFrame for Part 2
+np.random.seed(42)
+dates = pd.date_range(start='2025-01-01', end='2025-06-30', freq='D')
+regions = ['North', 'South', 'East', 'West']
+products = ['Electronics', 'Clothing', 'Books', 'Home Goods']
+
+data = {
+    'Date': np.random.choice(dates, 500),
+    'Region': np.random.choice(regions, 500),
+    'Product': np.random.choice(products, 500),
+    'Units Sold': np.random.randint(10, 100, 500),
+    'Price': np.round(np.random.uniform(20, 500, 500), 2)
+}
+sales_df = pd.DataFrame(data).sort_values(by='Date').reset_index(drop=True)
+print("Sales DataFrame created. Here are the first 5 rows:")
+print(sales_df.head())
+</code>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="mb-12">
+                <h3 class="text-xl font-semibold">Question 6: Filtered Aggregation</h3>
+                <p class="mb-4">Calculate the total revenue (Units Sold * Price) for each region, but only for the 'Electronics' product category.</p>
+                <h4 class="font-semibold mt-4 mb-2">Expected Output:</h4>
+                <div class="expected-output">Region
+East     307409.52
+North    188659.88
+South    252758.55
+West     277568.10
+dtype: float64</div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="mb-12">
+                <h3 class="text-xl font-semibold">Question 7: Time-Series Growth Calculation</h3>
+                <p class="mb-4">First, create a 'Revenue' column. Then, for the 'North' region only, find the month with the highest percentage sales growth over the previous month.</p>
+                <h4 class="font-semibold mt-4 mb-2">Expected Output:</h4>
+                <div class="expected-output">Timestamp('2025-03-31 00:00:00', freq='M')</div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="mb-12">
+                <h3 class="text-xl font-semibold">Question 8: Pivot Table Creation</h3>
+                <p class="mb-4">Create a pivot table showing the average 'Units Sold' for each 'Product' (rows) across each 'Region' (columns).</p>
+                <h4 class="font-semibold mt-4 mb-2">Expected Output:</h4>
+                <div class="expected-output">Region         East      North      South       West
+Product                                           
+Books     53.250000  54.677419  54.333333  53.238095
+Clothing  59.000000  51.687500  52.896552  49.500000
+Electronics   54.403509  56.029412  55.511111  52.921569
+Home Goods   52.483871  49.300000  51.583333  58.916667</div>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="mb-12">
+                <h3 class="text-xl font-semibold">Question 9: Group-wise N-Largest</h3>
+                <p class="mb-4">Find the top 2 transactions (rows) with the highest 'Units Sold' within each region.</p>
+                <h4 class="font-semibold mt-4 mb-2">Expected Output:</h4>
+                <div class="expected-output">         Date Region      Product  Units Sold   Price
+102 2025-02-12   East     Clothing          99  131.06
+368 2025-05-18   East        Books          98  331.07
+28  2025-01-14  North   Home Goods          99  357.11
+365 2025-05-16  North        Books          98  472.07
+39  2025-01-18  South        Books          99  107.03
+453 2025-06-15  South     Clothing          99  424.36
+238 2025-04-05   West        Books          99  136.26
+195 2025-03-22   West  Electronics          98  422.37</div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="mb-12">
+                <h3 class="text-xl font-semibold">Question 10: Filtering with a Transformed Group Value</h3>
+                <p class="mb-4">Find all transactions where 'Units Sold' was greater than the average 'Units Sold' for that specific product category. Display the shape of the resulting DataFrame.</p>
+                <h4 class="font-semibold mt-4 mb-2">Expected Output:</h4>
+                <div class="expected-output">(253, 5)</div>
+            </div>
+
+            <!-- Question 11 -->
+            <div class="mb-12">
+                <h3 class="text-xl font-semibold">Question 11: Missing Data Imputation</h3>
+                <p class="mb-4">
+                    Load the `aps_failure_sample.csv` dataset from the provided URL. The file uses 'na' as the missing value marker. First, calculate and display the total number of missing values. Then, create a new DataFrame `df_imputed` where all missing values are filled with the mean of their respective columns.
+                </p>
+                <a href="https://raw.githubusercontent.com/subashgandyer/datasets/main/aps_failure_training_set.csv" target="_blank" class="text-blue-600 hover:underline">Download Dataset File</a>
+                <div class="code-block">
+                    <button class="copy-btn">Copy</button>
+<code class="language-python">
+# Steps to follow:
+# 1. Load the dataset
+# 2. Calculate and print total missing values
+# 3. Create df_imputed and fill missing values with column means
+</code>
+                </div>
+                <h4 class="font-semibold mt-4 mb-2">Expected Output:</h4>
+                <div class="expected-output">Total missing values: 71649
+<br>
+... (The imputed DataFrame will be too large to display, but your code should create it)
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.copy-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const codeBlock = button.nextElementSibling;
+                    const codeText = codeBlock.innerText;
+
+                    const textArea = document.createElement('textarea');
+                    textArea.value = codeText;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    try {
+                        document.execCommand('copy');
+                        button.textContent = 'Copied!';
+                        button.style.backgroundColor = '#22c55e'; // Green
+                        setTimeout(() => {
+                            button.textContent = 'Copy';
+                            button.style.backgroundColor = '#4b5563'; // Original color
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Failed to copy text: ', err);
+                        button.textContent = 'Error';
+                    }
+                    document.body.removeChild(textArea);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
